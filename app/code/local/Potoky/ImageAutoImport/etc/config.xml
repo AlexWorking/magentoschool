@@ -9,10 +9,10 @@
         <models>
             <imageautoimport>
                 <class>Potoky_ImageAutoImport_Model</class>
-                <resource_model>imageautoimport_mysql4</resource_model>
+                <resourceModel>imageautoimport_mysql4</resourceModel>
             </imageautoimport>
             <imageautoimport_mysql4>
-                <class>Potoky_ImageAutoImport_Model_mysql4</class>
+                <class>Potoky_ImageAutoImport_Model_Mysql4</class>
                 <entities>
                     <imageinfo>
                         <table>images_info</table>

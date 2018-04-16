@@ -2,7 +2,7 @@
 
 $installer = $this;
 $installer->startSetup();
-$tabName = $installer->getTable('potoky_imageautoimport/images_info');
+$tabName = $installer->getTable('imageautoimport/imageinfo');
 $installer->getConnection()->dropTable($tabName);
 $table = $installer->getConnection()
     ->newTable($tabName)
@@ -23,8 +23,8 @@ $table = $installer->getConnection()
     ->addColumn('image_url',Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
         'nullable' => 'false',
     ), 'Path to image')
-    ->addColumn('image_size', Varien_Db_Ddl_Table::TYPE_BOOLEAN, null, array(
-        'nullable' => true
+    ->addColumn('image_size', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+        'nullable' => false
     ), 'Image size compared to 1MB: lt => false, eq => null, gt => true')
     ->addColumn('status', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
         'nullable' => false
@@ -32,3 +32,5 @@ $table = $installer->getConnection()
     ->addColumn('error_message', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
         'nullable' => true
     ), 'Error message if the image failed to get assigned to the product');
+$installer->getConnection()->createTable($table);
+$installer->endSetup();
