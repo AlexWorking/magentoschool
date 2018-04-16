@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_catalog_product_index>
+        <reference name="products_list">
+            <action method="addButton" translate="label">
+                <id>images_import_queue</id>
+                <data>
+                    <label>Import of Images</label>
+                    <class></class>
+                    <onclick>setLocation(queue_button_url)</onclick>
+                </data>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="queue_button_url" template="imageautoimport/queue_button_url.phtml" />
+        </reference>
+    </adminhtml_catalog_product_index>
+</layout>

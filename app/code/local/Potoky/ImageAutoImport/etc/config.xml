@@ -42,4 +42,13 @@
             </imageautoimport_setup>
         </resources>
     </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <potoky_imageautoimport>
+                    <file>imageautoimport.xml</file>
+                </potoky_imageautoimport>
+            </updates>
+        </layout>
+    </adminhtml>
 </config>
