@@ -51,4 +51,15 @@
             </updates>
         </layout>
     </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <potoky_imageautoimport before="Mage_Adminhtml">Potoky_ImageAutoImport_Adminhtml</potoky_imageautoimport>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
 </config>
