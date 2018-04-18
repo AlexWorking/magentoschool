@@ -17,11 +17,11 @@ class Potoky_ImageAutoImport_Block_Adminhtml_Catalog_ImportToQueue extends Mage_
         parent::__construct();
 
 
-        $this->_addButton('saveandcontinue', array(
-            'label'     => Mage::helper('adminhtml')->__('Save And Continue Edit'),
-            'onclick'   => 'saveAndContinueEdit()',
-            'class'     => 'save',
-        ), -100);
+        $this->removeButton('back')
+            ->removeButton('reset')
+            ->_updateButton('save', 'label', $this->__('Check Data'))
+            ->_updateButton('save', 'id', 'upload_button')
+            ->_updateButton('save', 'onclick', 'editForm.postToFrame();');
     }
 
     public function getHeaderText()
