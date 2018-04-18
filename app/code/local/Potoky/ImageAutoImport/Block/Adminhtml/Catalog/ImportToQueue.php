@@ -10,7 +10,7 @@ class Potoky_ImageAutoImport_Block_Adminhtml_Catalog_ImportToQueue extends Mage_
 {
     public function __construct()
     {
-        $this->_blockGroup = 'potoky_imageautoimport';
+        $this->_blockGroup = 'imageautoimport';
         $this->_controller = 'adminhtml_catalog';
         $this->_mode = 'importtoqueue';
 
