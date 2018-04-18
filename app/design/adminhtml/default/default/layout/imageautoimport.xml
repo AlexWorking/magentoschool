@@ -17,7 +17,7 @@
     </adminhtml_catalog_product_index>
     <adminhtml_catalog_product_importimages>
         <reference name="content">
-            <block name="imageautoimport"
+            <block type="imageautoimport/adminhtml_catalog_importtoqueue" name="importimages_catalog_importtoqueue"/>
         </reference>
     </adminhtml_catalog_product_importimages>
 </layout>

@@ -6,6 +6,11 @@
         </Potoky_ImageAutoImport>
     </modules>
     <global>
+        <blocks>
+            <imageautoimport>
+                <class>Potoky_ImageAutoImport_Block</class>
+            </imageautoimport>
+        </blocks>
         <models>
             <imageautoimport>
                 <class>Potoky_ImageAutoImport_Model</class>
@@ -20,6 +25,11 @@
                 </entities>
             </imageautoimport_mysql4>
         </models>
+        <helpers>
+            <imageautoimport>
+                <class>Potoky_ImageAutoImport_Helper</class>
+            </imageautoimport>
+        </helpers>
         <resources>
             <imageautoimport_write>
                 <connection>
