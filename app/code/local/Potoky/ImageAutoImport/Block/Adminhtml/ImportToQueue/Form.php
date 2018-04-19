@@ -6,12 +6,12 @@
  * Date: 4/18/2018
  * Time: 12:10 PM
  */
-class Potoky_ImageAutoImport_Block_Adminhtml_Catalog_ImportToQueue_Form extends Mage_Adminhtml_Block_Widget_Form
+class Potoky_ImageAutoImport_Block_Adminhtml_ImportToQueue_Form extends Mage_Adminhtml_Block_Widget_Form
 {
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form(array(
-                'id' => 'importimages_form',
+                'id' => 'importtoqueue_form',
                 'action'  => $this->getUrl('*/*/validate'),
                 'method'  => 'post',
                 'enctype' => 'multipart/form-data'

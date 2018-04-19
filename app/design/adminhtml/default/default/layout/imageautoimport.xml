@@ -15,9 +15,12 @@
             <block type="adminhtml/template" name="queue_button_url" template="imageautoimport/queue_button_url.phtml" />
         </reference>
     </adminhtml_catalog_product_index>
-    <adminhtml_catalog_product_importimages>
+    <adminhtml_imageautoimport_index>
         <reference name="content">
-            <block type="imageautoimport/adminhtml_catalog_importtoqueue" name="importimages_catalog_importtoqueue"/>
+            <block type="imageautoimport/adminhtml_importtoqueue" name="index_importtoqueue"/>
         </reference>
-    </adminhtml_catalog_product_importimages>
+    </adminhtml_imageautoimport_index>
+    <adminhtml_imageautoimport_validate>
+        <update handle="adminhtml_imageautoimport_index"/>
+    </adminhtml_imageautoimport_validate>
 </layout>
