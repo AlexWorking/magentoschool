@@ -16,19 +16,11 @@ class Potoky_ImageAutoImport_Block_Adminhtml_ImportToQueue extends Mage_Adminhtm
 
         parent::__construct();
 
-        $url = $this->getUrl('*/*/validate');
-        if (Mage::helper('core/url')->getCurrentUrl() == $url) {
-            $this->addButton('import', array(
-                'lable' => $this->__('Import'),
-                'class' => 'save',
-                'onclick' => 'import'
-            ));
-        }
         $this->removeButton('back')
             ->removeButton('reset')
             ->_updateButton('save', 'label', $this->__('Check Data'))
             ->_updateButton('save', 'id', 'upload_button')
-            ->_updateButton('save', 'onclick', "setLocation('$url');");
+            ->_updateButton('save', 'onclick', 'postToQueue();');
     }
 
     public function getHeaderText()
