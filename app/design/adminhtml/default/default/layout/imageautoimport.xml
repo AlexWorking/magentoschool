@@ -6,7 +6,6 @@
                 <id>images_import_queue</id>
                 <data>
                     <label>Import of Images</label>
-                    <class></class>
                     <onclick>setLocation(queue_button_url)</onclick>
                 </data>
             </action>
@@ -19,10 +18,10 @@
         <reference name="content">
             <block type="adminhtml/template" template="imageautoimport/before.phtml" name="importtoqueue.form.before" alias="form_before"/>
             <block type="imageautoimport/adminhtml_importtoqueue" name="index_importtoqueue"/>
+            <block type="adminhtml/template" template="imageautoimport/after.phtml" name="importtoqueue.form.after" alias="form_after"/>
         </reference>
     </adminhtml_imageautoimport_index>
     <adminhtml_imageautoimport_validate>
         <update handle="adminhtml_imageautoimport_index"/>
-        <block type="importexport/adminhtml_import_frame_result" template="importexport/import/frame/result.phtml" name="import.frame.result" alias="import_frame_result" output="toHtml"/>
     </adminhtml_imageautoimport_validate>
 </layout>
