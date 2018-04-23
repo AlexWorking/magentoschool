@@ -12,27 +12,25 @@ class Potoky_ImageAutoImport_Adminhtml_ImageAutoImportController extends Mage_Ad
     {
         $this->loadLayout();
         $this->renderLayout();
+        Mage::getSingleton('adminhtml/session')->unsetData('resultMessage');
     }
 
     public function validateAction()
     {
         try {
-            /** @var $import Mage_ImportExport_Model_Import */
             $import = Mage::getModel('importexport/import');
             $sourceFile = $import->setData('entity', 'import_to_queue')->uploadSource();
-            $sourceAdapter = Mage_ImportExport_Model_Import_Adapter::findAdapterFor($sourceFile);
-            $adapter = Mage::getModel('importexport/import_entity_product');
-            $adapter->setSource($sourceAdapter);
-            $colNames = $adapter->getSource()->getColNames();
-            while ($sourceAdapter->valid()) {
-                $look = $sourceAdapter->current();
-                $sourceAdapter->next();
-            }
+            $imageInfo = Mage::getModel('imageautoimport/imageinfo');
+            $imageInfo->setAdapter($sourceFile)
+                ->validateColNames()
+                ->validateRows();
 
+            Mage::getSingleton('adminhtml/session')->setData(
+                'resultMessage',
+                Mage::Helper('imageautoimport')->__('Images were successfully added to queue!'));
         } catch (Exception $e) {
-                $e->getMessage();
+            Mage::getSingleton('adminhtml/session')->setData('resultMessage', $e->getMessage());
         }
-        $this->loadLayout();
-        $this->renderLayout();
+        $this->_redirect('*/*/index');
     }
 }

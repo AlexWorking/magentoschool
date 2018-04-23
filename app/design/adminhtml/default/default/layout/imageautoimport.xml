@@ -21,7 +21,4 @@
             <block type="adminhtml/template" template="imageautoimport/after.phtml" name="importtoqueue.form.after" alias="form_after"/>
         </reference>
     </adminhtml_imageautoimport_index>
-    <adminhtml_imageautoimport_validate>
-        <update handle="adminhtml_imageautoimport_index"/>
-    </adminhtml_imageautoimport_validate>
 </layout>

@@ -15,7 +15,6 @@ class Potoky_ImageAutoImport_Block_Adminhtml_ImportToQueue extends Mage_Adminhtm
         $this->_mode = 'importtoqueue';
 
         parent::__construct();
-    //comment
         $this->removeButton('back')
             ->removeButton('reset')
             ->_updateButton('save', 'label', $this->__('Check & Go'))

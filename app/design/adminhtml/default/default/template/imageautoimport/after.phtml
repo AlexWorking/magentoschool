@@ -1,4 +1,4 @@
 <?php
 
-echo '<div>It\'s Me</div>';
-?>
+$inDiv = Mage::getSingleton('adminhtml/session')->getData('resultMessage');
+echo '<div style="overflow: auto; height: 300px; width: 400px">' . $inDiv . '</div>';
