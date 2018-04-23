@@ -11,9 +11,21 @@ class Potoky_ImageAutoImport_Model_ImageInfo extends Mage_Core_Model_Abstract
         $this->_init('imageautoimport/imageinfo');
     }
 
+    private function _setRows()
+    {
+        while ($this->_adapter->valid()) {
+            $key = $this->_adapter->key();
+            $row = $this->_adapter->current();
+            $this->_rows[$key] = $row;
+            $this->_adapter->next();
+        }
+    }
+
     public function setAdapter($sourceFile)
     {
+        $this->_rows = [];
         $this->_adapter = Mage_ImportExport_Model_Import_Adapter::findAdapterFor($sourceFile);
+        $this->_setRows();
         return $this;
     }
 
@@ -31,8 +43,13 @@ class Potoky_ImageAutoImport_Model_ImageInfo extends Mage_Core_Model_Abstract
         }
         if (!empty($errorMessage)) {
             throw new Exception(
-                sprintf('<pre> Column name error(s):</br>%s', $errorMessage)
-                , 1
+                sprintf(
+                    "%s" . Mage::HELPER('imageautoimport')->__("Column name error(s):") . '%s%s',
+                    '<pre>',
+                    '</br>',
+                    $errorMessage
+                ),
+                 1
             );
         }
         return $this;
@@ -42,30 +59,32 @@ class Potoky_ImageAutoImport_Model_ImageInfo extends Mage_Core_Model_Abstract
     {
         $product = Mage::getModel('catalog/product');
         $errorMessage = '';
-        while ($this->_adapter->valid()) {
+        foreach ($this->_rows as $key => $row) {
             $rowErrorMessage = '';
             $hasBeen = sprintf(
-                "%s" . Mage::HELPER('imageautoimport')->__("You have errors in row %s:</br>"),
-                '<pre>',
-                $this->_adapter->key() + 1
+                "%s" . Mage::HELPER('imageautoimport')->__("You have errors(s) in row %s:%s"),
+                '<p><pre>',
+                $key + 1,
+                '</br>'
             );
-            $row = $this->_adapter->current();
             if (!$product->loadByAttribute('sku', $row['sku'])) {
                 $errorMessage .= sprintf(
-                    "%s" . Mage::HELPER('imageautoimport')->__("Product with sku \"%s\" doesn't exist.</br>"),
+                    "%s" . Mage::HELPER('imageautoimport')->__("Product with sku \"%s\" doesn't exist.%s"),
                     $hasBeen,
-                    $row['sku']);
+                    $row['sku'],
+                    '</br>'
+                );
                 $hasBeen = '';
             }
             if (!file_exists($row['url'])) {
                 $errorMessage .= sprintf(
-                    "%s" . Mage::HELPER('imageautoimport')->__("File pointed to by \"%s\" URL does not exist or this URL is not valid.</br>"),
+                    "%s" . Mage::HELPER('imageautoimport')->__("File pointed to by \"%s\" URL does not exist or the URL is not valid.%s"),
                     $hasBeen,
-                    $row['url']);
+                    $row['url'],
+                    '</br>'
+                );
             }
-            $this->_rows[] = $row;
-            $errorMessage .= ($rowErrorMessage != '') ? $rowErrorMessage. '</br></pre>' : '';
-            $this->_adapter->next();
+            $errorMessage .= ($rowErrorMessage != '') ? $rowErrorMessage. '</br></pre></p>' : '';
         }
         if (!empty($errorMessage)) {
             throw new Exception($errorMessage, 2);
