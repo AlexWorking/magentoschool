@@ -17,9 +17,12 @@ $table = $installer->getConnection()
         'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT
     ), 'Time when the record was created, the image was queued')
     ->addColumn('loading_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
-        'nullable' => 'false',
-        'default' => Varien_Db_Ddl_Table::TIMESTAMP_INIT
+        'nullable' => 'true',
+        'default' => null
     ), 'Time when there was a trial to load the image, no matter successfull or not')
+    ->addColumn('product_sku',Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
+        'nullable' => 'false',
+    ), 'Sku of the product the image is assigned to be attached to' )
     ->addColumn('image_url',Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
         'nullable' => 'false',
     ), 'Path to image')

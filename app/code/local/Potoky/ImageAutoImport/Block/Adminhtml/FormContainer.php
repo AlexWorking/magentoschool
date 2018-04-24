@@ -6,7 +6,7 @@
  * Date: 4/17/2018
  * Time: 1:03 PM
  */
-class Potoky_ImageAutoImport_Block_Adminhtml_ImportToQueue extends Mage_Adminhtml_Block_Widget_Form_Container
+class Potoky_ImageAutoImport_Block_Adminhtml_FormContainer extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     public function __construct()
     {

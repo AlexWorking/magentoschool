@@ -10,6 +10,11 @@
             <imageautoimport>
                 <class>Potoky_ImageAutoImport_Block</class>
             </imageautoimport>
+            <adminhtml>
+                <rewrite>
+                    <catalog_product_edit_tabs>Potoky_ImageAutoImport_Block_Adminhtml_Tabs</catalog_product_edit_tabs>
+                </rewrite>
+            </adminhtml>
         </blocks>
         <models>
             <imageautoimport>

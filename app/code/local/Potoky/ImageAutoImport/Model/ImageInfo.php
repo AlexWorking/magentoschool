@@ -2,7 +2,7 @@
 
 class Potoky_ImageAutoImport_Model_ImageInfo extends Mage_Core_Model_Abstract
 {
-    private $_adapter;
+    private $_adapter = null;
 
     private $_rows = [];
 
@@ -21,6 +21,13 @@ class Potoky_ImageAutoImport_Model_ImageInfo extends Mage_Core_Model_Abstract
         }
     }
 
+    public function isSetAdapter() {
+        if ($this->_adapter === null) {
+            throw new Exception('Adapter is not set. Please contact Your developer to resolve the issue', 0);
+        }
+        return true;
+    }
+
     public function setAdapter($sourceFile)
     {
         $this->_rows = [];
@@ -29,25 +36,52 @@ class Potoky_ImageAutoImport_Model_ImageInfo extends Mage_Core_Model_Abstract
         return $this;
     }
 
+    public function getRows() {
+        return $this->_rows;
+    }
+
+    public function validateContent()
+    {
+        $this->isSetAdapter();
+        if (empty($this->_rows)) {
+            throw new Exception(Mage::HELPER('imageautoimport')->__("File columns do not contain any information."));
+        }
+        return $this;
+    }
+
     public function validateColNames()
     {
+        $this->isSetAdapter();
         $colNames = $this->_adapter->getColNames();
+        $required = ['sku', 'url'];
         $errorMessage = '';
-        foreach ($colNames as $colName) {
-            if (!in_array($colName, ['sku', 'url'])) {
+        foreach ($required as $value) {
+            if (!in_array($value, $colNames)) {
                 $errorMessage .= sprintf(
-                    "\"%s\"" . Mage::HELPER('imageautoimport')->__(" is not a valid column name.</br>"),
-                    $colName
+                    "%s\"%s\"" . Mage::HELPER('imageautoimport')->__(" is a required column.") . "%s",
+                    '<p>',
+                    $value,
+                    '</p>'
+                );
+            }
+        }
+        foreach ($colNames as $colName) {
+            if (!in_array($colName, $required)) {
+                $errorMessage .= sprintf(
+                    "\"%s\"" . Mage::HELPER('imageautoimport')->__(" is not a valid column name.") . "%s",
+                    $colName,
+                    '</br>'
                 );
             }
         }
         if (!empty($errorMessage)) {
             throw new Exception(
                 sprintf(
-                    "%s" . Mage::HELPER('imageautoimport')->__("Column name error(s):") . '%s%s',
+                    "%s" . Mage::HELPER('imageautoimport')->__("Column name error(s):") . '%s%s%s',
                     '<pre>',
-                    '</br>',
-                    $errorMessage
+                    '</br></br>',
+                    $errorMessage,
+                    '</pre>'
                 ),
                  1
             );
@@ -57,13 +91,14 @@ class Potoky_ImageAutoImport_Model_ImageInfo extends Mage_Core_Model_Abstract
 
     public function validateRows()
     {
+        $this->isSetAdapter();
         $product = Mage::getModel('catalog/product');
         $errorMessage = '';
         foreach ($this->_rows as $key => $row) {
             $rowErrorMessage = '';
             $hasBeen = sprintf(
                 "%s" . Mage::HELPER('imageautoimport')->__("You have errors(s) in row %s:%s"),
-                '<p><pre>',
+                '<pre><p>',
                 $key + 1,
                 '</br>'
             );
@@ -84,7 +119,7 @@ class Potoky_ImageAutoImport_Model_ImageInfo extends Mage_Core_Model_Abstract
                     '</br>'
                 );
             }
-            $errorMessage .= ($rowErrorMessage != '') ? $rowErrorMessage. '</br></pre></p>' : '';
+            $errorMessage .= ($rowErrorMessage != '') ? $rowErrorMessage. '</p></pre>' : '';
         }
         if (!empty($errorMessage)) {
             throw new Exception($errorMessage, 2);
