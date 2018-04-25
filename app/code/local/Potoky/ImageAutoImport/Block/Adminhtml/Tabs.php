@@ -11,7 +11,7 @@ class Potoky_ImageAutoImport_Block_Adminhtml_Tabs extends Mage_Adminhtml_Block_C
         //add new tab
         $this->addTab('imageautoimport', array(
             'label'     => Mage::helper('imageautoimport')->__('Image Import'),
-            'url' => $this->getUrl('*/*/flow', array('_current' => true)),
+            'url' => $this->getUrl('*/imageautoimport/flow', array('_current' => true)),
             'class' => 'ajax',
         ));
         return $this->parent;

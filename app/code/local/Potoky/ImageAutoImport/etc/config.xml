@@ -77,4 +77,14 @@
             </adminhtml>
         </routers>
     </admin>
+    <crontab>
+       <jobs>
+           <imageassigne>
+               <schedule><cron_expr>*/1 * * * *</cron_expr></schedule>
+               <run>
+                    <model>imageautoimport/observer::execute</model>
+              </run>
+           </imageassigne>
+       </jobs>
+    </crontab>
 </config>

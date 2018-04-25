@@ -22,8 +22,11 @@
         </reference>
     </adminhtml_imageautoimport_index>
     <adminhtml_imageautoimport_flow>
-        <reference name="content">
+        <block type="core/text_list" name="root" output="toHtml">
             <block type="imageautoimport/adminhtml_gridcontainer" name="importtoqueue_gridcontainer"/>
-        </reference>
+        </block>
     </adminhtml_imageautoimport_flow>
+    <adminhtml_imageautoimport_flowgrid>
+        <update handle="adminhtml_imageautoimport_flow"/>
+    </adminhtml_imageautoimport_flowgrid>
 </layout>

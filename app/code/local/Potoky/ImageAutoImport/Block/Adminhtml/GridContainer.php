@@ -9,6 +9,8 @@ class Potoky_ImageAutoImport_Block_Adminhtml_GridContainer extends Mage_Adminhtm
         $this->_mode = 'importtoqueue';
 
         parent::__construct();
+        $this->removeButton('add');
+        $this->setTemplate('imageautoimport/flow_grid.phtml');
     }
 
     public function getHeaderText()

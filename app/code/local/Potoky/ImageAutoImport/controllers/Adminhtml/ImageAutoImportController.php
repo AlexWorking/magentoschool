@@ -48,6 +48,28 @@ class Potoky_ImageAutoImport_Adminhtml_ImageAutoImportController extends Mage_Ad
 
     public function flowAction()
     {
+        preg_match(
+            '#(.+\/id\/)([0-9]+)(\/.+)#',
+            $this->_getRefererUrl(),
+            $matches
+        );
+        $id = $matches[2];
+        $currentProduct = Mage::getModel('catalog/product')->load($id);
+        Mage::register('current_product', $currentProduct);
+        $this->loadLayout();
+        $this->renderLayout();
+    }
+
+    public function flowGridAction()
+    {
+        preg_match(
+            '#(.+\/id\/)([0-9]+)(\/.+)#',
+            $this->_getRefererUrl(),
+            $matches
+        );
+        $id = $matches[2];
+        $currentProduct = Mage::getModel('catalog/product')->load($id);
+        Mage::register('current_product', $currentProduct);
         $this->loadLayout();
         $this->renderLayout();
     }
