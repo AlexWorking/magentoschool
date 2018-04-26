@@ -40,6 +40,7 @@ class Potoky_ImageAutoImport_Adminhtml_ImageAutoImportController extends Mage_Ad
             Mage::getSingleton('adminhtml/session')->setData(
                 'resultMessage',
                 Mage::Helper('imageautoimport')->__('Images were successfully added to queue!'));
+            Mage::dispatchEvent('images_imported', ['success' => 1]);
         } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->setData('resultMessage', $e->getMessage());
         }
