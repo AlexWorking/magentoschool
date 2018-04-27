@@ -126,14 +126,4 @@ class Potoky_ImageAutoImport_Model_ImageInfo extends Mage_Core_Model_Abstract
         }
         return $this;
     }
-
-    public function cutOffDuplicates($rows = [])
-    {
-        $refinedRows = [];
-        $arrayToCompare = [];
-        foreach ($rows as $row) {
-            foreach ($row as $columns) {
-            }
-        }
-    }
 }
