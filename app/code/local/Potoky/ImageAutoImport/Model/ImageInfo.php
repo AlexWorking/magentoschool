@@ -111,9 +111,9 @@ class Potoky_ImageAutoImport_Model_ImageInfo extends Mage_Core_Model_Abstract
                 );
                 $hasBeen = '';
             }
-            if (!file_exists($row['url'])) {
+            if (!filter_var($row['url'], FILTER_VALIDATE_URL)) {
                 $errorMessage .= sprintf(
-                    "%s" . Mage::HELPER('imageautoimport')->__("File pointed to by \"%s\" URL does not exist or the URL is not valid.%s"),
+                    "%s" . Mage::HELPER('imageautoimport')->__("\"%s\" is not a valid URL.%s"),
                     $hasBeen,
                     $row['url'],
                     '</br>'
