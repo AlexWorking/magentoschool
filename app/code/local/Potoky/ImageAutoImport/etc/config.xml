@@ -56,16 +56,6 @@
                 </connection>
             </imageautoimport_setup>
         </resources>
-        <events>
-            <images_imported>
-                <observers>
-                    <potoky_imageautoimport_images_imported>
-                        <class>Potoky_ImageAutoImport_Model_Observer</class>
-                        <method>importImages</method>
-                    </potoky_imageautoimport_images_imported>
-                </observers>
-            </images_imported>
-        </events>
     </global>
     <adminhtml>
         <layout>
@@ -89,12 +79,12 @@
     </admin>
     <crontab>
        <jobs>
-           <imageassigne>
-               <schedule><cron_expr>*/1 * * * *</cron_expr></schedule>
+           <potoky_imageautoimport_go>
+               <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
                <run>
                     <model>imageautoimport/observer::importImages</model>
               </run>
-           </imageassigne>
+           </potoky_imageautoimport_go>
        </jobs>
     </crontab>
 </config>
