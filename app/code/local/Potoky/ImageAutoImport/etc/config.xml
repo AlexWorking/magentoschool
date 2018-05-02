@@ -65,6 +65,15 @@
                 </potoky_imageautoimport>
             </updates>
         </layout>
+        <translate>
+            <modules>
+                <Potoky_ImageAutoImport>
+                    <files>
+                        <default>Potoky_ImageAutoImport.csv</default>
+                    </files>
+                </Potoky_ImageAutoImport>
+            </modules>
+        </translate>
     </adminhtml>
     <admin>
         <routers>

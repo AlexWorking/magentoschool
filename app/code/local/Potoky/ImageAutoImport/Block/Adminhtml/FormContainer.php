@@ -17,13 +17,13 @@ class Potoky_ImageAutoImport_Block_Adminhtml_FormContainer extends Mage_Adminhtm
         parent::__construct();
         $this->removeButton('back')
             ->removeButton('reset')
-            ->_updateButton('save', 'label', $this->__('Check & Go'))
+            ->_updateButton('save', 'label', Mage::Helper('imageautoimport')->__('Check & Go'))
             ->_updateButton('save', 'id', 'upload_button')
             ->_updateButton('save', 'onclick', 'postToQueue();');
     }
 
     public function getHeaderText()
     {
-        return Mage::helper('imageautoimport')->__('Import to Queue');
+        return Mage::helper('imageautoimport')->__('Add to Queue');
     }
 }
